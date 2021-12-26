@@ -1,5 +1,5 @@
 # Convolutional Codes
-Convolutional Codes are error-correcting codes that generates parity symbols via the sliding application of a boolean polynomial function to a data stream.
+Convolutional codes are error-correcting codes that generates parity symbols via the sliding application of a boolean polynomial function to a data stream.
 
 In block codes, the data comprises of a block of data of a definite length. However, in convolutional codes, the input data bits are not divided into block but are instead fed as streams of data bits, which convolve to output bits based upon the logic function of the encoder. 
 
