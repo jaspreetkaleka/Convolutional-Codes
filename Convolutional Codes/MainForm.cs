@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -25,7 +24,6 @@ namespace Convolutional_Codes
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            
         }
 
         private void testButton_Click(object sender, EventArgs e)
@@ -36,9 +34,6 @@ namespace Convolutional_Codes
 
             //PolyNomial mXg1X = mX.Multiply(g1X);
             //PolyNomial mXg2X = mX.Multiply(g2X);
-
-
-
         }
 
         #region "Validations"
@@ -83,7 +78,7 @@ namespace Convolutional_Codes
             {
                 gX = null;
                 U = null;
-               
+
                 Validated_Gx = false;
 
                 foreach (DataGridViewRow row in gXDataGridView.Rows)
@@ -118,7 +113,7 @@ namespace Convolutional_Codes
             }
             catch (Exception ex)
             {
-                mainErrorProvider.SetError(gXDataGridView, "Error - " + ex.Message); 
+                mainErrorProvider.SetError(gXDataGridView, "Error - " + ex.Message);
                 return "Error - " + ex.Message;
             }
         }
@@ -199,7 +194,6 @@ namespace Convolutional_Codes
             {
                 gXDataGridView.Rows[i].Cells[0].Value = "g" + (i + 1);
             }
-
         }
 
         private void gXDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -208,9 +202,12 @@ namespace Convolutional_Codes
             {
                 try
                 {
-                    gXDataGridView.Rows[e.RowIndex].Cells[1].Value = ApplyPolyFormat(gXDataGridView.Rows[e.RowIndex].Cells[1].Value.ToString());
+                    gXDataGridView.Rows[e.RowIndex].Cells[1].Value =
+                        ApplyPolyFormat(gXDataGridView.Rows[e.RowIndex].Cells[1].Value.ToString());
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 
@@ -234,12 +231,14 @@ namespace Convolutional_Codes
                 r_ED_TextBox.Text = r_ED_TextBox.Text.Replace(" ", "");
                 if (r_ED_TextBox.Text.Length > n)
                 {
-                    mainErrorProvider.SetError(r_ED_TextBox, "Length of the received Vector <r> is greator than the length of the codeword.");
+                    mainErrorProvider.SetError(r_ED_TextBox,
+                        "Length of the received Vector <r> is greator than the length of the codeword.");
                     return;
                 }
                 else if (r_ED_TextBox.Text.Length < n)
                 {
-                    mainErrorProvider.SetError(r_ED_TextBox, "Length of the received Vector <r> is less than the length of the codeword.");
+                    mainErrorProvider.SetError(r_ED_TextBox,
+                        "Length of the received Vector <r> is less than the length of the codeword.");
                     return;
                 }
                 else
@@ -249,7 +248,7 @@ namespace Convolutional_Codes
             }
 
             PolyNomial r = new PolyNomial(r_ED_TextBox.Text);
-            PolyNomial SX = null;// r.Remainder(gX);
+            PolyNomial SX = null; // r.Remainder(gX);
             if (r_ED_TextBox.Text.Contains("X"))
             {
                 S_ED_TextBox.Text = SX.ToPolynomialString();
@@ -286,11 +285,15 @@ namespace Convolutional_Codes
                 else
                 {
                     r_ED_TextBox.Text = r_ED_TextBox.Text.Replace(" ", "");
-                    r_ED_TextBox.Text = r_ED_TextBox.Text.Last() + r_ED_TextBox.Text.Substring(0, r_ED_TextBox.Text.Length - 1);
+                    r_ED_TextBox.Text = r_ED_TextBox.Text.Last() +
+                                        r_ED_TextBox.Text.Substring(0, r_ED_TextBox.Text.Length - 1);
                 }
+
                 detectErrorButton.PerformClick();
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         private void rol_ED_Button_Click(object sender, EventArgs e)
@@ -307,11 +310,15 @@ namespace Convolutional_Codes
                 else
                 {
                     r_ED_TextBox.Text = r_ED_TextBox.Text.Replace(" ", "");
-                    r_ED_TextBox.Text = r_ED_TextBox.Text.Substring(1, r_ED_TextBox.Text.Length - 1) + r_ED_TextBox.Text.First();
+                    r_ED_TextBox.Text = r_ED_TextBox.Text.Substring(1, r_ED_TextBox.Text.Length - 1) +
+                                        r_ED_TextBox.Text.First();
                 }
+
                 detectErrorButton.PerformClick();
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         private void r_ED_TextBox_Leave(object sender, EventArgs e)
@@ -320,6 +327,7 @@ namespace Convolutional_Codes
             {
                 r_ED_TextBox.Text = ApplyPolyFormat(r_ED_TextBox.Text);
             }
+
             detectErrorButton.PerformClick();
         }
 
@@ -340,12 +348,14 @@ namespace Convolutional_Codes
                 r_EC_TextBox.Text = r_EC_TextBox.Text.Replace(" ", "");
                 if (r_EC_TextBox.Text.Length > n)
                 {
-                    mainErrorProvider.SetError(r_EC_TextBox, "Length of the received Vector <r> is greater than the length of the codeword.");
+                    mainErrorProvider.SetError(r_EC_TextBox,
+                        "Length of the received Vector <r> is greater than the length of the codeword.");
                     return;
                 }
                 else if (r_EC_TextBox.Text.Length < n)
                 {
-                    mainErrorProvider.SetError(r_EC_TextBox, "Length of the received Vector <r> is less than the length of the codeword.");
+                    mainErrorProvider.SetError(r_EC_TextBox,
+                        "Length of the received Vector <r> is less than the length of the codeword.");
                     return;
                 }
                 else
@@ -355,7 +365,7 @@ namespace Convolutional_Codes
             }
 
             PolyNomial r = new PolyNomial(r_EC_TextBox.Text);
-            PolyNomial SX = null;// r.Remainder(gX);
+            PolyNomial SX = null; // r.Remainder(gX);
 
             if (r_EC_TextBox.Text.Contains("X"))
             {
@@ -420,6 +430,7 @@ namespace Convolutional_Codes
                     {
                         SetGx();
                     }
+
                     if (U == null)
                     {
                         int totalCodewords = Convert.ToInt32(Math.Pow(2, k));
@@ -449,11 +460,11 @@ namespace Convolutional_Codes
                             {
                                 foreach (PolyNomial p in mXgX)
                                 {
-                                    str = str + p[i].ToString(); 
+                                    str = str + p[i].ToString();
                                 }
                             }
 
-                            sb.Append(str.PadRight(codeWordMaxLength, '0')); 
+                            sb.Append(str.PadRight(codeWordMaxLength, '0'));
                         }
 
                         U_TextBox.Text = ApplyBinaryFormat(sb.ToString());
@@ -465,7 +476,8 @@ namespace Convolutional_Codes
                 else
                 {
                     mainTabControl.SelectedIndex = 0;
-                    MessageBox.Show("Enter valid inputs for 'k', 'n', 'K' and 'g(X)' first.", "Error!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Enter valid inputs for 'k', 'n', 'K' and 'g(X)' first.", "Error!!!",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
@@ -485,7 +497,8 @@ namespace Convolutional_Codes
                 else
                 {
                     mainTabControl.SelectedIndex = 0;
-                    MessageBox.Show("Enter valid inputs for 'k', 'n', 'K' and 'g(X)' first.", "Error!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Enter valid inputs for 'k', 'n', 'K' and 'g(X)' first.", "Error!!!",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
@@ -495,7 +508,7 @@ namespace Convolutional_Codes
         public string ApplyBinaryFormat(string s)
         {
             s = s.Replace(" ", "");
-            s = s.Trim(new char[] { '\n', '\r' });
+            s = s.Trim(new char[] {'\n', '\r'});
             s = s.Replace("1", "1  ");
             s = s.Replace("0", "0  ");
             s = s.Replace("—", "—  ");
@@ -506,13 +519,10 @@ namespace Convolutional_Codes
         {
             s = s.Replace("x", " X ");
             s = s.Replace(" ", "");
-            s = s.Trim(new char[] { '\n', '\r' });
+            s = s.Trim(new char[] {'\n', '\r'});
             s = s.Replace("+", " + ");
             s = s.Trim();
             return s;
         }
-
-      
-       
     }
 }
